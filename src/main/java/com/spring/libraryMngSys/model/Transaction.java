@@ -1,13 +1,16 @@
 package com.spring.libraryMngSys.model;
 
-import lombok.Builder;
-import lombok.Data;
+import com.spring.libraryMngSys.request.TransactionType;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Entity
 public class Transaction {
@@ -16,15 +19,20 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    private String externalTxnId;
+
+    @Enumerated(value = EnumType.STRING)
+    private TransactionType transactionType;
+
     private double payment;
 
     @ManyToOne
     @JoinColumn
-    private Book my_book;
+    private Book book;
 
     @ManyToOne
     @JoinColumn
-    private Student my_student;
+    private Student student;
 
     @CreationTimestamp
     private Date transactionDate;

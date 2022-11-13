@@ -1,7 +1,8 @@
 package com.spring.libraryMngSys.model;
 
-import lombok.Builder;
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.spring.libraryMngSys.response.BookSearchResponse;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -9,7 +10,10 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Entity
 public class Book {
@@ -27,9 +31,10 @@ public class Book {
     @JoinColumn
     private Student student;
 
-    @OneToMany(mappedBy = "my_book")
+    @OneToMany(mappedBy = "book")
     private List<Transaction> transactionList;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn
     private Author author;
@@ -39,4 +44,18 @@ public class Book {
     @UpdateTimestamp
     private Date updatedOn;
 
+
+    public BookSearchResponse to() {
+        return BookSearchResponse.builder()
+                .id(id)
+                .name(name)
+                .cost(cost)
+                .genre(genre)
+                .student(student)
+                .transactionList(transactionList)
+                .author(author)
+                .createdOn(createdOn)
+                .updatedOn(updatedOn)
+                .build();
+    }
 }

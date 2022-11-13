@@ -1,13 +1,17 @@
 package com.spring.libraryMngSys.model;
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Entity
 public class Student {
@@ -28,12 +32,14 @@ public class Student {
     @Column(unique = true)
     private String email;
 
+    @CreationTimestamp
     private Date createdOn;
+    @UpdateTimestamp
     private Date updatedOn;
 
     @OneToMany(mappedBy = "student")
     private List<Book> bookList;
 
-    @OneToMany(mappedBy = "my_student")
+    @OneToMany(mappedBy = "student")
     private List<Transaction> transactionList;
 }
