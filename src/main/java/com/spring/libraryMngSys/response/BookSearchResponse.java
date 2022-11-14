@@ -14,6 +14,7 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
+//Class created to avoid circular dependency which leads to StackOverflow
 @Getter
 @Setter
 @NoArgsConstructor

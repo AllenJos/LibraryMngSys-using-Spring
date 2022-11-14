@@ -12,6 +12,7 @@ public class StudentController {
     @Autowired
     StudentService studentService;
 
+    //Create Student API
     @PostMapping("/student")
     public void createStudent(@RequestBody StudentCreateRequest studentCreateRequest){
         studentService.create(studentCreateRequest);

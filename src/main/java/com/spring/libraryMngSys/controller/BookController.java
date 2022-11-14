@@ -17,11 +17,13 @@ public class BookController {
     @Autowired
     BookService bookService;
 
+    //Create API for Book
     @PostMapping("/book")
     public void createBook(@RequestBody BookCreateRequest bookCreateRequest){
         bookService.create(bookCreateRequest);
     }
 
+    //API for finding books based on BookFilterType
     //localhost:9000/books/search?filter=AUTHOR_NAME&value=Allen
     @GetMapping("/books/search")
     public List<BookSearchResponse> findBooks(@RequestParam("filter") BookFilterType bookFilterType,

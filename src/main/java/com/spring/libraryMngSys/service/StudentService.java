@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 public class StudentService {
     @Autowired
     StudentRepository studentRepository;
+
+
     public void create(StudentCreateRequest studentCreateRequest) {
         Student student = studentCreateRequest.to();
         studentRepository.save(student);

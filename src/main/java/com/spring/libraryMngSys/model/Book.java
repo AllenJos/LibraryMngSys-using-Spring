@@ -19,12 +19,12 @@ import java.util.List;
 public class Book {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //IDENTITY: our DB generates values for id
     private int id;
     private String name;
     private int cost;
 
-    @Enumerated(value = EnumType.STRING)
+    @Enumerated(value = EnumType.STRING) //STRING: saved as provided string values in enum
     private Genre genre;
 
     @ManyToOne
@@ -45,6 +45,8 @@ public class Book {
     private Date updatedOn;
 
 
+    //Convert Book object to BookSearchResponse object:
+    // Remember Why? Hint: Circular Dependency
     public BookSearchResponse to() {
         return BookSearchResponse.builder()
                 .id(id)

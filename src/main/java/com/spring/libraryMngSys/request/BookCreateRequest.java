@@ -7,6 +7,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
+//Handles Book details coming from the frontend
 @Getter
 @Setter
 @NoArgsConstructor
@@ -26,6 +27,7 @@ public class BookCreateRequest {
     @NotNull
     private Author author;
 
+    //to() function for creating Book object from BookCreateRequest object.
     public Book to(){
         return Book.builder()
                 .name(this.name)

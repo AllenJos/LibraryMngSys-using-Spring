@@ -14,8 +14,17 @@ public class TransactionController {
     @Autowired
     TransactionService transactionService;
 
+    //issue Transaction API:
+    // accepts bookId, studentId
     @PostMapping("/transaction/issue")
     public void issueTxn(@RequestParam("bookId") Integer bookId, @RequestParam("studentId") Integer studentId) throws TxnServiceException {
         transactionService.issueTransaction(bookId, studentId);
+    }
+
+    //return Transaction API:
+    // accepts bookId, studentId
+    @PostMapping("/transaction/return")
+    public void returnTxn(@RequestParam("bookId") Integer bookId, @RequestParam("studentId") Integer studentId) throws TxnServiceException {
+        transactionService.returnTransaction(bookId, studentId);
     }
 }
