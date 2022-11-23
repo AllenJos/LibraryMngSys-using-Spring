@@ -12,6 +12,12 @@ spring:
     hibernate:
       ddl-auto: update
 
+users:
+  student:
+    authority: std
+  admin:
+    authority: adm
+
 book:
   return:
     due-date: 14

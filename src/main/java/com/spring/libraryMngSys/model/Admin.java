@@ -6,44 +6,30 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
+@Entity
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
-@Entity
-public class Student {
+public class Admin {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String name;
-
-    @Column(unique = true, nullable = false)
-    private String contact;
-    private String address;
-
-    @Enumerated(value = EnumType.STRING)
-    private AccountStatus accountStatus;
-
-    @Column(unique = true)
-    private String email;
+    private int age;
 
     @CreationTimestamp
     private Date createdOn;
+
     @UpdateTimestamp
     private Date updatedOn;
-
-    @OneToMany(mappedBy = "student")
-    private List<Book> bookList;
-
-    @OneToMany(mappedBy = "student")
-    private List<Transaction> transactionList;
 
     @OneToOne
     @JoinColumn
     private MyUser myUser;
+
 }
