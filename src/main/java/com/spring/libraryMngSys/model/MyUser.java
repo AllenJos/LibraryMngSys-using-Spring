@@ -1,11 +1,13 @@
 package com.spring.libraryMngSys.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.stream.Collectors;
@@ -15,7 +17,7 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @Setter
 @Builder
-public class MyUser implements UserDetails {
+public class MyUser implements UserDetails, Serializable {
 
     private static final String AUTHORITY_DELIMITER = ":";
 
@@ -33,10 +35,12 @@ public class MyUser implements UserDetails {
 
     @Getter
     @OneToOne(mappedBy = "myUser")
+    @JsonIgnoreProperties("myUser")
     private Student student;
 
     @Getter
     @OneToOne(mappedBy = "myUser")
+    @JsonIgnoreProperties("myUser")
     private Admin admin;
 
     @Override

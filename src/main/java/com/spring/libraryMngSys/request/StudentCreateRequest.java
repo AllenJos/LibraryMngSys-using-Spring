@@ -1,6 +1,7 @@
 package com.spring.libraryMngSys.request;
 
 import com.spring.libraryMngSys.model.AccountStatus;
+import com.spring.libraryMngSys.model.MyUser;
 import com.spring.libraryMngSys.model.Student;
 import lombok.*;
 
@@ -24,6 +25,12 @@ public class StudentCreateRequest {
 
     private String email;
 
+    @NotBlank
+    private String username;
+
+    @NotBlank
+    private String password;
+
     public Student to() {
         return Student.builder()
                 .name(name)
@@ -31,6 +38,14 @@ public class StudentCreateRequest {
                 .address(address)
                 .accountStatus(AccountStatus.ACTIVE)
                 .email(email)
+                .build();
+    }
+
+    public UserCreateRequest toUser(){
+        return UserCreateRequest.builder()
+                .username(this.username)   //changed
+                .password(this.password)
+                .student(this.to())
                 .build();
     }
 }

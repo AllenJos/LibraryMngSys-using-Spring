@@ -21,3 +21,8 @@ users:
 book:
   return:
     due-date: 14
+
+logging:
+  level:
+    org:
+      springframework: info

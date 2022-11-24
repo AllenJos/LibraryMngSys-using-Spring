@@ -21,7 +21,7 @@ public class CacheRepository {
      */
     public void set(MyUser myUser){
         String key = getKey(myUser.getUsername());
-        redisTemplate.opsForValue().set(key, myUser, 10, TimeUnit.MINUTES);
+        redisTemplate.opsForValue().set(key, myUser, 24, TimeUnit.HOURS);
     }
 
     public MyUser get(String username){

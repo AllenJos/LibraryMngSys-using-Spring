@@ -19,7 +19,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
-public class LibraryConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     MyUserDetailsService myUserDetailsService;
 
@@ -50,31 +50,5 @@ public class LibraryConfig extends WebSecurityConfigurerAdapter {
                 .formLogin();
     }
 
-    @Bean
-    PasswordEncoder getPasswordEncoder(){
-        return new BCryptPasswordEncoder();
-    }
-
-    //Redis Configuration
-    @Bean
-    RedisConnectionFactory getConnectionFactory(){
-        RedisStandaloneConfiguration redisStandaloneConfiguration =
-                new RedisStandaloneConfiguration("localhost", 6379);
-        LettuceConnectionFactory lettuceConnectionFactory = new LettuceConnectionFactory();
-
-        return lettuceConnectionFactory;
-    }
-
-    @Bean
-    RedisTemplate<String, Object> getTemplate(){
-        RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
-        redisTemplate.setKeySerializer(new StringRedisSerializer());
-        redisTemplate.setValueSerializer(new JdkSerializationRedisSerializer());
-        redisTemplate.setHashKeySerializer(new StringRedisSerializer());
-        redisTemplate.setHashValueSerializer(new JdkSerializationRedisSerializer());
-
-        redisTemplate.setConnectionFactory(getConnectionFactory());
-        return redisTemplate;
-    }
 
 }
